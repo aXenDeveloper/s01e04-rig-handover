@@ -43,6 +43,11 @@ describe('readNight edges', () => {
     expect(readNight('runs', '../package')).toBeNull();
   });
 
+  it('reads an explicit null error as no error', () => {
+    const line = JSON.stringify({ at: '2026-10-30T01:00:00+01:00', job: 'a', status: 'ok', owner: null, error: null });
+    expect(parseNight('2026-10-30', line)).toMatchObject({ badLines: 0, rows: [{ job: 'a', lastError: null }] });
+  });
+
   it('reads an empty night as no rows', () => {
     expect(parseNight('2026-10-30', '')).toEqual({ night: '2026-10-30', rows: [], badLines: 0 });
   });

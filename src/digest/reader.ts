@@ -20,7 +20,7 @@ function parseLine(line: string): RunLine | null {
   if (typeof v.at !== 'string' || typeof v.job !== 'string' || typeof v.status !== 'string') return null;
   if (!STATUSES.includes(v.status)) return null;
   if (v.owner !== null && v.owner !== undefined && typeof v.owner !== 'string') return null;
-  if (v.error !== undefined && typeof v.error !== 'string') return null;
+  if (v.error !== undefined && v.error !== null && typeof v.error !== 'string') return null;
   return {
     at: v.at,
     job: v.job,
